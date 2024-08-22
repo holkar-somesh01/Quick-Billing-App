@@ -10,12 +10,12 @@ exports.GetAllProducts = asyncHandler(async (req, res) => {
     const result = await Products.find()
     res.json({ message: "Produts Fetch Success", result })
 })
+
 exports.AddProduct = asyncHandler(async (req, res) => {
     upload(req, res, async (err) => {
         if (err) {
             return res.status(500).json({ message: "File upload error", error: err.message });
         }
-
         const { name, price, desc, qty, unit, } = req.body;
         const { isError, error } = checkEmpty({ name, price, desc, qty, unit });
         if (isError) {
@@ -27,17 +27,13 @@ exports.AddProduct = asyncHandler(async (req, res) => {
             const { secure_url } = await cloudinary.uploader.upload(req.file.path)
             images=secure_url
         }
-
         await Products.create({ name, price, desc, qty, unit, images: images })
         res.json({ message: "Product Successfully Added" })
     })
 })
 
-
-
 exports.UpdateProduct = asyncHandler(async (req, res) => {
     upload(req, res, async (err) => {
-         
         const { isError, error } = checkEmpty(req.body)
         if (isError) {
             return res.status(401).json({ message: "All Fields Required ", error: error })
@@ -48,6 +44,7 @@ exports.UpdateProduct = asyncHandler(async (req, res) => {
         res.json({ message: "Product SuccessFully Updated" })
     })
 })
+
 exports.DeleteProdcut = asyncHandler(async (req, res) => {
     await Products.findByIdAndDelete(req.params.id)
     res.json({ message: "Product SuccessFully Deleted." })
