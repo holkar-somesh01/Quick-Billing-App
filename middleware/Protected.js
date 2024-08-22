@@ -4,6 +4,9 @@ exports.userProtected = (req, res, next) => {
     const { admin } = req.cookies
     if (!admin) { return res.status(401).json({ message: "No Cookie Found" }) }
     jwt.verify(admin, process.env.JWT_KEY, (err, decode) => {
+        console.log(admin);
+        console.log(decode);
+        
         if (err) {
             console.log(err)
             return res.status(401).json({ message: "JWT Error", error: err.message })
