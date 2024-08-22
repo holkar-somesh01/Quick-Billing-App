@@ -21,7 +21,6 @@ exports.CreateBill = asyncHandler(async (req, res) => {
             const { secure_url } = await cloudinary.uploader.upload(item.path)
             images.push(secure_url)
         }
-
         productData[0].images = images
         console.log(productData)
         await Bill.create({ customerName, mobile, productData, qty, unit, amount, date, total, discount, shopAddress, price })

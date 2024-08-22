@@ -7,5 +7,6 @@ const userSchema = new mongoose.Schema({
     qty: { type: String, required: true },
     unit: { type: String, required: true },
     images: { type: String, },
+    userId: { type: mongoose.Types.ObjectId, required: true }
 })
 module.exports = mongoose.model("products", userSchema)

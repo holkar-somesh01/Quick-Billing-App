@@ -44,7 +44,6 @@ exports.LoginAdmin = asyncHandler(async (req, res) => {
         return res.status(401).json({ message: process.env.NODE_ENV === "development" ? "invalid password" : "Invalid Credentials" })
     }
 
-    // send OTP
     const otp = Math.floor(10000 + Math.random() * 900000)
     await Auth.findByIdAndUpdate(isFound._id, { otp: otp })
     await sendEmail({
@@ -78,10 +77,7 @@ exports.VerifyOTP = asyncHandler(async (req, res) => {
     if (otp !== isFound.otp) {
         res.status(401).json({ message: "Invalid OTP" })
     }
-    //jWT
     const Token = JWT.sign({ userID: isFound._id }, process.env.JWT_KEY, { expiresIn: "10d" })
-    //Cookie
-
     res.cookie("admin", Token, {
         maxAge: 10 * 24 * 60 * 60 * 1000,
         httpOnly: true,
