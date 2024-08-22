@@ -22,9 +22,13 @@ exports.AddProduct = asyncHandler(async (req, res) => {
             return res.status(401).json({ message: "All Fields Required", error: error });
         }
         // console.log(req.file)
-        const { secure_url } = await cloudinary.uploader.upload(req.file.path)
+        let images=''
+        if (req.file) {
+            const { secure_url } = await cloudinary.uploader.upload(req.file.path)
+            images=secure_url
+        }
 
-        await Products.create({ name, price, desc, qty, unit, images: secure_url })
+        await Products.create({ name, price, desc, qty, unit, images: images })
         res.json({ message: "Product Successfully Added" })
     })
 })
