@@ -8,8 +8,8 @@ const app = express()
 app.use(cookieParser())
 
 app.use(cors({
-    origin: `${process.env.LIVE_SERVER}`,//
-    // origin: true,
+    // origin: `${process.env.LIVE_SERVER}`,//
+    origin: true,
     credentials: true
 }))
 app.use(express.json())
