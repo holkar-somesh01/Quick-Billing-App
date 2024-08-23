@@ -78,13 +78,13 @@ exports.VerifyOTP = asyncHandler(async (req, res) => {
         return  res.status(401).json({ message: "Invalid OTP" })
     }
     const Token = JWT.sign({ userID: isFound._id }, process.env.JWT_KEY, { expiresIn: "10d" })
-    res.cookie("admin", Token, {
-        maxAge: 10 * 24 * 60 * 60 * 1000,
+    res.cookie('admin',Token, {
+        maxAge: 10 * 24 * 60 * 60 * 1000, 
         httpOnly: true,
-        // secure: process.env.NODE_ENV === "production"
-    })
-    res.json({
-        message: "OTP Verify Success.",
+        secure: process.env.NODE_ENV === 'production'
+      });
+    res.json({ 
+        message: "OTP Verify Success...!",
     })
 })
 exports.LogoutAdmin = asyncHandler(async (req, res) => {
