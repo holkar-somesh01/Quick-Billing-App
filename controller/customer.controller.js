@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs")
 
 exports.RegisterCustomer = asyncHandler(async (req, res) => {
     const { name, email, mobile, address } = req.body
-    const userId = req.loggedInUser
+    const userId = req.loggedInUser||req.params.id
     const { isError, error } = checkEmpty({ name, mobile,  userId })
     if (isError) {
         return res.status(401).json({ message: "All Fields Required", error: error })
