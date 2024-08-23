@@ -5,6 +5,6 @@ const userSchema = new mongoose.Schema({
     email: { type: String, },
     mobile: { type: Number, required: true },
     address: { type: String, },
-    userId: { type: mongoose.Types.ObjectId, required: true }
+    userId: { type: mongoose.Types.ObjectId, ref:"auth", required: true }
 })
 module.exports = mongoose.model("customer", userSchema)
