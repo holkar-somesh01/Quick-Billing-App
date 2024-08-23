@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken")
 
 exports.userProtected = (req, res, next) => {
     const { admin } = req.cookies
-    console.log("Cookie yenar", req.cookies.admin);
+    console.log("Cookie yenar", req.cookies);
     if (!req.cookies.admin) { return res.status(401).json({ message: "No Cookie Found" }) }
     jwt.verify(admin, process.env.JWT_KEY, (err, decode) => {
         console.log("...............USerIDD",decode);
