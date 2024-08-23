@@ -7,7 +7,8 @@ const cloudinary = require("../utils/cloudinary.config")
 
 
 exports.GetAllProducts = asyncHandler(async (req, res) => {
-    const result = await Products.find()
+    const userId=req.params.id
+    const result = await Products.find({userId})
     res.json({ message: "Produts Fetch Success", result })
 })
 
@@ -37,7 +38,7 @@ exports.UpdateProduct = asyncHandler(async (req, res) => {
         if (isError) {
             return res.status(401).json({ message: "All Fields Required ", error: error })
         }
-        console.log(req.file)
+        // console.log(req.file)
         const { secure_url } = await cloudinary.uploader.upload(req.file.path)
         await Products.findByIdAndUpdate(req.params.id, {...req.body, images:secure_url})
         res.json({ message: "Product SuccessFully Updated" })
