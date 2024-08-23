@@ -8,8 +8,8 @@ const app = express()
 app.use(cookieParser())
 
 app.use(cors({
-    // origin: "http://localhost:5173",
-    origin: true,
+    origin: process.env.LIVE_SERVER,
+    // origin: true,
     credentials: true
 }))
 app.use(express.json())
@@ -32,5 +32,4 @@ mongoose.connect(process.env.MONGO_URL)
 mongoose.connection.once("open", () => {
     console.log("MONGO CONNECTED")
     app.listen(process.env.PORT, console.log(`SERVER RUNNING 🏃‍♀️`))
-    // console.log(process.env.MONGO_URL)
 })
