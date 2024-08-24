@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 const cors = require("cors")
-const cookieParser = require("cookie-parser")
+const cookieParser= require("cookie-parser")
 const express = require("express")
 require("dotenv").config()
 
@@ -8,8 +8,8 @@ const app = express()
 app.use(cookieParser())
 
 app.use(cors({
-    // origin: `${process.env.LIVE_SERVER}`,//
-    origin: true,
+    origin: "http://localhost:5173",
+    // origin: true,
     credentials: true
 }))
 app.use(express.json())

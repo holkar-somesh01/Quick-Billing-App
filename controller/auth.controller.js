@@ -51,7 +51,8 @@ exports.LoginAdmin = asyncHandler(async (req, res) => {
         <p>Your Login OTP <strong>${otp}</strong> </p>`
     })
     res.json({
-        message: "Credentials Verify Success. OTP send to your registered Email", result: {
+        message: "Credentials Verify Success. OTP send to your registered Email", 
+        result: {
             _id: isFound._id,
             name: isFound.name,
             email: isFound.email,
@@ -81,7 +82,7 @@ exports.VerifyOTP = asyncHandler(async (req, res) => {
     res.cookie('admin',Token, {
         maxAge: 10 * 24 * 60 * 60 * 1000, 
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production'//
+        secure: process.env.NODE_ENV === 'production'
       });
     res.json({ 
         message: "OTP Verify Success...!",
