@@ -23,7 +23,7 @@ exports.RegisterCustomer = asyncHandler(async (req, res) => {
 })
 
 exports.FetchAllCustomers = asyncHandler(async (req, res) => {
-    const userId = req.loggedInUser || req.params.id
+    const userId = req.loggedInUser 
     const result = await Customer.find({ userId })
     res.json({ message: "Customer Fetch Success", result })
 })

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const cors = require("cors")
+const path = require("path")
 const cookieParser= require("cookie-parser")
 const express = require("express")
 require("dotenv").config()
@@ -8,7 +9,7 @@ const app = express()
 app.use(cookieParser())
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://quick-billing-app-fn58.onrender.com",
     // origin: true,
     credentials: true
 }))
@@ -21,7 +22,8 @@ app.use("/api/customer", require("./routes/customer.routes"))
 app.use("/api/product", require("./routes/product.routes"))
 
 app.use("*", (req, res) => {
-    res.status(404).json({ message: "Resource Not Found" })
+res.sendFile(path.join(__dirname, "dist", "index.html"))
+    // res.status(404).json({ message: "Resource Not Found" })
 })
 app.use((err, req, res, next) => {
     console.log(err)

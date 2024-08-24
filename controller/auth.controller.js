@@ -90,5 +90,5 @@ exports.VerifyOTP = asyncHandler(async (req, res) => {
 })
 exports.LogoutAdmin = asyncHandler(async (req, res) => {
     res.clearCookie("admin")
-    res.json({ message: "Admin Login Success" })
+    res.json({ message: "Admin LogOut Success" })
 })
