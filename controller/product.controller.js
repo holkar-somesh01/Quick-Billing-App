@@ -7,8 +7,9 @@ const cloudinary = require("../utils/cloudinary.config")
 
 
 exports.GetAllProducts = asyncHandler(async (req, res) => {
-    const userId=req.params.id
-    const result = await Products.find({userId})
+    const userId= req.params.id
+    console.log(userId)
+    const result = await Products.find({userId:userId})
     res.json({ message: "Produts Fetch Success", result })
 })
 

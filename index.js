@@ -9,8 +9,8 @@ const app = express()
 app.use(cookieParser())
 
 app.use(cors({
-    origin: "https://quick-billing-app-fn58.onrender.com",
-    // origin: true,
+    // origin: "https://quick-billing-app-fn58.onrender.com",
+    origin: true,
     credentials: true
 }))
 app.use(express.json())
