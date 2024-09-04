@@ -7,9 +7,6 @@ const bcrypt = require("bcryptjs")
 exports.RegisterCustomer = asyncHandler(async (req, res) => {
     const { name, email, mobile, address } = req.body
     const userId = req.loggedInUser
-    console.log("------------------");
-        console.log(req.loggedInUser);
-    console.log("------------------");
     
     const { isError, error } = checkEmpty({ name, mobile,  userId })
     if (isError) {

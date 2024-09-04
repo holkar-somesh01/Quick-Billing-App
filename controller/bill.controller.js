@@ -8,7 +8,6 @@ const validator = require("validator")
 exports.CreateBill = asyncHandler(async (req, res) => {
     upload(req, res, async (err) => {
         const { customerName, mobile, productData, qty, unit, amount, date, total, discount, shopAddress, price } = req.body
-        console.log(req.files)
         const { error, isError } = checkEmpty({ customerName, mobile, productData, qty, unit, amount, date, price })
         if (isError) {
             return res.status(401).json({ message: `All Fields Required ${error}` })
@@ -22,7 +21,6 @@ exports.CreateBill = asyncHandler(async (req, res) => {
             images.push(secure_url)
         }
         productData[0].images = images
-        console.log(productData)
         await Bill.create({ customerName, mobile, productData, qty, unit, amount, date, total, discount, shopAddress, price })
         res.json({ message: "Customer Bill Create Success" })
     })
